@@ -1,0 +1,37 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="partials/import :: import"></th:block>
+    <title><span th:text="${product.name}"></span></title>
+</head>
+
+<th:block th:include="partials/header :: header"></th:block>
+<body>
+
+<div class="col-md-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <img th:src="@{/images/img_avatar.png}" alt="Avatar" style="width:100%"/>
+                    <div class="container">
+                        <h4><b>Thymeleaf</b></h4>
+                        <button class="btn btn-sm btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="container">
+        <div>
+            <h2 class="font-green">$ <span th:text="${product.price}"></span></h2>
+            <h3>Description</h3>
+            <p><span th:text="${product.description}">ggg</span></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

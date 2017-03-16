@@ -1,0 +1,36 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="partials/import :: import"></th:block>
+    <title>Update Product</title>
+</head>
+<th:block th:include="partials/header :: header"></th:block>
+<body>
+
+<div class="container">
+    <div class="row">
+        <h4>Update Product</h4>
+        <div class="col-md-6">
+            <form action="#" th:action="@{/products/edit/{id}/(id=${product.id})}" method="POST">
+                <div class="form-group">
+                    <input th:field="*{product.name}" th:value="${product.name}" name="name" type="text" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <textarea th:field="*{product.description}" th:value="${product.description}" name="description" type="text" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <input th:field="*{product.price}" th:value="${product.price}" name="price" type="number" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

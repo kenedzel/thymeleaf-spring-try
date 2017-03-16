@@ -3,13 +3,11 @@ package kenneth.thymeleaf.controllers;
 import kenneth.thymeleaf.bean.ProductBean;
 import kenneth.thymeleaf.models.Product;
 import kenneth.thymeleaf.services.ProductService;
+import kenneth.thymeleaf.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -70,21 +68,23 @@ public class ProductController {
         return bean;
     }
 
-    @RequestMapping("/view")
-    public String getProduct()
+    @RequestMapping(value = "/view/{id}")
+    public String view(@PathVariable(value = "id") Long id, Model model)
     {
-        return "product_show";
+        model.addAttribute("product", productService.findById(id));
+        System.out.println(productService.findById(id));
+        return "products/view";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(Model model)
     {
         model.addAttribute("product", new Product());
-        return "product_add";
+        return "products/add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute ProductBean productBean, Model model)
+    public String save(@ModelAttribute ProductBean productBean, Model model)
     {
         System.out.println("Invoking save product");
         System.out.println(productBean);
@@ -92,16 +92,26 @@ public class ProductController {
         productService.create(product);
 
         model.addAttribute("product", productBean);
-        return new ModelAndView("redirect:/product/add");
+        return "redirect:/products/";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit(@ModelAttribute ProductBean productBean)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView edit(@PathVariable(value = "id") Long id, @ModelAttribute ProductBean productBean)
     {
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("product", prepareProductBean(productService.findById(productBean.getId())));
         model.put("products", prepareListofBean(productService.findAll()));
-        return new ModelAndView("product_add", model);
+        return new ModelAndView("products/update", model);
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    public String update(@PathVariable(value = "id") Long id, @ModelAttribute ProductBean productBean, Model model)
+    {
+        model.addAttribute("product",prepareProductBean(productService.findById(id)));
+        Product product = productService.findById(id);
+        productService.edit(product);
+        System.out.println("Invoking update product.");
+        return "redirect:/products/";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -112,15 +122,16 @@ public class ProductController {
         model.put("product", null);
         model.put("products",prepareListofBean(productService.findAll()));
 
-        return new ModelAndView("product_add", model);
+        return new ModelAndView("products/add", model);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView listAll()
     {
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
+        System.out.println(prepareListofBean(productService.findAll()));
         model.put("products", prepareListofBean(productService.findAll()));
-        return new ModelAndView("products", model);
+        return new ModelAndView("products/products", model);
     }
 
 
