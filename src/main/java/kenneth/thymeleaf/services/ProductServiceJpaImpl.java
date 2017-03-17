@@ -35,7 +35,15 @@ public class ProductServiceJpaImpl implements ProductService {
 
     @Override
     public Product edit(Product product) {
-        return this.productRepository.save(product);
+        Product updatedProduct = productRepository.findOne(product.getId());
+
+        System.out.println("PRODUCT FROM EDIT PAGE: " + product);
+        updatedProduct.setId(product.getId());
+        updatedProduct.setName(product.getName());
+        updatedProduct.setDescription(product.getDescription());
+        updatedProduct.setPrice(product.getPrice());
+        System.out.println("UPDATED PRODUCT: " +updatedProduct);
+        return this.productRepository.save(updatedProduct);
     }
 
     @Override

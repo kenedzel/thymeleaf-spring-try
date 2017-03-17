@@ -29,7 +29,7 @@ public class ProductController {
     private Product prepareModel(ProductBean productBean)
     {
         Product product = new Product();
-        product.setId(null);
+        product.setId(productBean.getId());
         product.setName(productBean.getName());
         product.setDescription(productBean.getDescription());
         product.setPrice(productBean.getPrice());
@@ -72,7 +72,6 @@ public class ProductController {
     public String view(@PathVariable(value = "id") Long id, Model model)
     {
         model.addAttribute("product", productService.findById(id));
-        System.out.println(productService.findById(id));
         return "products/view";
     }
 
@@ -107,29 +106,31 @@ public class ProductController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public String update(@PathVariable(value = "id") Long id, @ModelAttribute ProductBean productBean, Model model)
     {
+
         model.addAttribute("product",prepareProductBean(productService.findById(id)));
-        Product product = productService.findById(id);
+        Product product = prepareModel(productBean);
+        System.out.println(product);
         productService.edit(product);
         System.out.println("Invoking update product.");
         return "redirect:/products/";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView delete(ProductBean productBean)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable(value = "id") Long id, @ModelAttribute ProductBean productBean)
     {
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
+        System.out.println("delete: " + productBean);
         productService.deleteById(productBean.getId());
         model.put("product", null);
         model.put("products",prepareListofBean(productService.findAll()));
 
-        return new ModelAndView("products/add", model);
+        return new ModelAndView("redirect:/products/", model);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView listAll()
     {
         Map<String, Object> model = new HashMap<>();
-        System.out.println(prepareListofBean(productService.findAll()));
         model.put("products", prepareListofBean(productService.findAll()));
         return new ModelAndView("products/products", model);
     }
