@@ -7,3 +7,13 @@ $.extend( true, $.fn.dataTable.defaults, {
 $(document).ready(function () {
     $('#data-table').DataTable();
 });
+function passOnClick(id)
+{
+
+
+    var deleteButton = document.getElementById("deleteButton");
+    deleteButton.setAttribute("href", "/products/delete/{id}/"+"(id=" + id + ")");
+//delete id parameter
+
+}
+

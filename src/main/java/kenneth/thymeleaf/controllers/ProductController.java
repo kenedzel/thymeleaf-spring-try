@@ -118,6 +118,7 @@ public class ProductController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable(value = "id") Long id, @ModelAttribute ProductBean productBean)
     {
+        System.out.println("invoking delete ");
         Map<String, Object> model = new HashMap<>();
         System.out.println("delete: " + productBean);
         productService.deleteById(productBean.getId());

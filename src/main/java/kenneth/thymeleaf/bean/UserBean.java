@@ -5,7 +5,7 @@ package kenneth.thymeleaf.bean;
  */
 public class UserBean {
 
-    private Long id;
+    private Long user_id;
 
     private String name;
 
@@ -16,19 +16,19 @@ public class UserBean {
     public UserBean() {
     }
 
-    public UserBean(Long id, String name, String email, String password) {
-        this.id = id;
+    public UserBean(Long user_id, String name, String email, String password) {
+        this.user_id = user_id;
         this.name = name;
         this.email = email;
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public String getName() {
@@ -58,7 +58,7 @@ public class UserBean {
     @Override
     public String toString() {
         return "UserBean{" +
-                "id=" + id +
+                "user_id=" + user_id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

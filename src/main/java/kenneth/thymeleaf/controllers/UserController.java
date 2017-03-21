@@ -33,7 +33,7 @@ public class UserController {
     private User prepareModel(UserBean userBean)
     {
         User user = new User();
-        user.setId(null);
+        user.setUser_id(userBean.getUser_id());
         user.setName(userBean.getName());
         user.setEmail(userBean.getEmail());
         user.setPassword(userBean.getPassword());
@@ -51,7 +51,7 @@ public class UserController {
             for(User user : users)
             {
                 bean = new UserBean();
-                bean.setId(user.getId());
+                bean.setUser_id(user.getUser_id());
                 bean.setName(user.getName());
                 bean.setEmail(user.getEmail());
                 bean.setPassword(user.getPassword());
@@ -64,7 +64,7 @@ public class UserController {
     private UserBean prepareUserBean(User user)
     {
         UserBean bean = new UserBean();
-        bean.setId(user.getId());
+        bean.setUser_id(user.getUser_id());
         bean.setName(user.getName());
         bean.setEmail(user.getEmail());
         bean.setPassword(user.getPassword());
@@ -86,7 +86,7 @@ public class UserController {
         return "user_add";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute UserBean userBean, Model model)
     {
         User user = prepareModel(userBean);
@@ -101,7 +101,7 @@ public class UserController {
     {
         Map<String, Object> model = new HashMap<String, Object>();
 
-        model.put("user", prepareUserBean(userService.findById(userBean.getId())));
+        model.put("user", prepareUserBean(userService.findById(userBean.getUser_id())));
         model.put("users", prepareListofBean(userService.findAll()));
 
         return new ModelAndView("product_add", model);
@@ -112,7 +112,7 @@ public class UserController {
     {
         Map<String, Object> model = new HashMap<String, Object>();
 
-        userService.deleteById(userBean.getId());
+        userService.deleteById(userBean.getUser_id());
         model.put("product", null);
         model.put("products",prepareListofBean(userService.findAll()));
 
