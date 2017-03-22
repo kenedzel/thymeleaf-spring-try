@@ -33,6 +33,7 @@ public class ProductController {
         product.setName(productBean.getName());
         product.setDescription(productBean.getDescription());
         product.setPrice(productBean.getPrice());
+        product.setActive(productBean.isActive());
 
         return product;
     }
@@ -89,7 +90,7 @@ public class ProductController {
         System.out.println(productBean);
         Product product = prepareModel(productBean);
         productService.create(product);
-
+        System.out.println(product);
         model.addAttribute("product", productBean);
         return "redirect:/products/";
     }
@@ -106,7 +107,7 @@ public class ProductController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public String update(@PathVariable(value = "id") Long id, @ModelAttribute ProductBean productBean, Model model)
     {
-
+        System.out.println(productBean);
         model.addAttribute("product",prepareProductBean(productService.findById(id)));
         Product product = prepareModel(productBean);
         System.out.println(product);
@@ -121,7 +122,8 @@ public class ProductController {
         System.out.println("invoking delete ");
         Map<String, Object> model = new HashMap<>();
         System.out.println("delete: " + productBean);
-        productService.deleteById(productBean.getId());
+        System.out.println("Idddddddddddd: " + id);
+        productService.deleteById(id);
         model.put("product", null);
         model.put("products",prepareListofBean(productService.findAll()));
 

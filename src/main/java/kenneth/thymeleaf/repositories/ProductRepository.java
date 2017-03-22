@@ -14,4 +14,6 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>{
 
+    @Query(value = "SELECT * FROM products WHERE ACTIVE = 1", nativeQuery = true)
+    List<Product> findAllByActive();
 }

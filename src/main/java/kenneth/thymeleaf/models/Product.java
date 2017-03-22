@@ -22,14 +22,25 @@ public class Product {
     @Column(nullable = false, length = 20)
     private double price;
 
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean active;
+
     public Product() {
     }
 
-    public Product(Long id, String name, String description, double price) {
-        this.id = id;
+    public Product(String name, String description, double price, boolean active) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.active = active;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Long getId() {
@@ -71,6 +82,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
+                ", active=" + active +
                 '}';
     }
 }

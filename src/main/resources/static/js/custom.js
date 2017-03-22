@@ -9,10 +9,8 @@ $(document).ready(function () {
 });
 function passOnClick(id)
 {
-
-
     var deleteButton = document.getElementById("deleteButton");
-    deleteButton.setAttribute("href", "/products/delete/{id}/"+"(id=" + id + ")");
+    deleteButton.setAttribute("href", "/products/delete/" + id + "");
 //delete id parameter
 
 }

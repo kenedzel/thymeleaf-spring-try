@@ -13,6 +13,8 @@ public class ProductBean {
 
     private double price;
 
+    private boolean active;
+
     public Long getId() {
         return id;
     }
@@ -45,6 +47,14 @@ public class ProductBean {
         this.price = price;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "ProductBean{" +
@@ -52,6 +62,7 @@ public class ProductBean {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
+                ", active=" + active +
                 '}';
     }
 }

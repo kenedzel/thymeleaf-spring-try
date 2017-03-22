@@ -19,6 +19,11 @@ public class ProductServiceJpaImpl implements ProductService {
     ProductRepository productRepository;
 
     @Override
+    public List<Product> findAllActive() {
+        return this.productRepository.findAllByActive();
+    }
+
+    @Override
     public List<Product> findAll() {
         return this.productRepository.findAll();
     }
@@ -42,6 +47,7 @@ public class ProductServiceJpaImpl implements ProductService {
         updatedProduct.setName(product.getName());
         updatedProduct.setDescription(product.getDescription());
         updatedProduct.setPrice(product.getPrice());
+        updatedProduct.setActive(product.isActive());
         System.out.println("UPDATED PRODUCT: " +updatedProduct);
         return this.productRepository.save(updatedProduct);
     }

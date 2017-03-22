@@ -24,12 +24,12 @@ public class UserServiceJpaImpl implements UserService{
 
     @Autowired
     RoleRepository roleRepository;
-
+//
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User findByEmail(String email) {
+    public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -56,10 +56,5 @@ public class UserServiceJpaImpl implements UserService{
     @Override
     public User edit(User user) {
         return this.userRepository.save(user);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        this.userRepository.delete(id);
     }
 }

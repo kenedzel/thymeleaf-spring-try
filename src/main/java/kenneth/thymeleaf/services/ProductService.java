@@ -10,6 +10,8 @@ import java.util.List;
  */
 @Service
 public interface ProductService {
+
+    List<Product> findAllActive();
     List<Product> findAll();
     Product findById(Long id);
     Product create(Product product);

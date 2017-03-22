@@ -13,15 +13,23 @@
         <div class="col-md-6">
             <form action="#" th:action="@{/products/edit/{id}/(id=${product.id})}" method="POST">
                 <div class="form-group">
+                    <label th:for="Name" th:text="Name"/>
                     <input th:field="*{product.name}" th:value="${product.name}" name="name" type="text" class="form-control"/>
                 </div>
 
                 <div class="form-group">
+                    <label th:for="Description" th:text="Description"/>
                     <textarea th:field="*{product.description}" th:value="${product.description}" name="description" type="text" class="form-control"/>
                 </div>
 
                 <div class="form-group">
+                    <label th:for="price" th:text="Price"/>
                     <input th:field="*{product.price}" th:value="${product.price}" name="price" type="number" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label th:for="active" th:text="Status"/>
+                    <input th:field="*{product.active}" th:value="${product.active}" th:checked="${product.active}" name="active" th:type="checkbox" class="form-control"/>
                 </div>
 
                 <div class="form-group">

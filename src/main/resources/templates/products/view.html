@@ -2,7 +2,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="partials/import :: import"></th:block>
-    <title><span th:text="${product.name}"></span></title>
+    <title><th:block th:text="${product.name}"></th:block></title>
 </head>
 
 <th:block th:include="partials/header :: header"></th:block>
@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="card">
-                    <img th:src="@{/images/img_avatar.png}" alt="Avatar" style="width:100%"/>
+                    <img th:src="@{/images/pot.jpg}" alt="Avatar" style="width:100%"/>
                     <div class="container">
                         <h4><b><span th:text="${product.name}"></span> </b></h4>
                         <button class="btn btn-sm btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>

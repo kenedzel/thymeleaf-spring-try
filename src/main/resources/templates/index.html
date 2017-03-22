@@ -12,29 +12,29 @@
 </div>
 <th:block th:include="partials/header :: header"></th:block>
 <body>
-    <!--<div class="container">-->
-        <!--<div th:each="product, iterationStatus : ${products}">-->
-            <!--<div class="row">-->
-                <!--<div class="col-sm-4">-->
-                    <!--<span th:text="${product.price}"></span>-->
-                    <!--<div class="card">-->
-                        <!--<img th:src="@{/images/img_avatar.png}" alt="Avatar" style="width:100%"/>-->
-                        <!--<div class="container">-->
-                            <!--<h4><b><span th:text="${product.name}"></span></b></h4>-->
-                            <!--<p><span th:text="${product.description}"></span></p>-->
-                            <!--<p><a class="btn btn-sm btn-info" th:href="@{/products/view/{id}/(id=${product.id})}"><span class="fa fa-eye"></span></a></p>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div><br/>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4" th:each="product, iterationStatus : ${products}">
+                <div class="card">
+                    <div class="price-row">
+                        <b><span class="font-green"> $ </span><span class="font-green" th:text="${product.price}"></span></b>
+                    </div>
+                    <img th:src="@{/images/pot.jpg}" alt="Avatar" style="width:100%"/>
+                    <div class="container">
+                        <h4><b><span th:text="${product.name}"></span></b></h4>
+                        <p><span th:text="${product.description}"></span></p>
+                        <p><a class="btn btn-sm btn-info" th:href="@{/products/view/{id}/(id=${product.id})}"><span th:text="View"></span></a></p>
+                    </div>
+                </div>
+                <br/><br/>
+            </div>
+        </div>
 
-<br/><br/>
+    </div>
+
 
 <footer class="container-fluid text-center">
-    <pre>h  e  y</pre>
-    <form class="form-inline">Get deals:
+    <form class="form-inline">
         <input type="email" class="form-control" size="50" placeholder="Email Address"/>
         <button type="button" class="btn btn-danger">Sign Up</button>
     </form>

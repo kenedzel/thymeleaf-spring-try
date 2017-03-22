@@ -72,28 +72,28 @@ public class UserController {
         return bean;
     }
 
-
-    @RequestMapping("/view")
+    @RequestMapping(value = "/view")
     public String getUser()
     {
         return "user_show";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String add(Model model)
     {
         model.addAttribute("user", new User());
-        return "user_add";
+        return "/users/registration";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute UserBean userBean, Model model)
+    public String save(@ModelAttribute UserBean userBean, Model model)
     {
         User user = prepareModel(userBean);
-        userService.create(user);
+        System.out.println(user);
+//        userService.create(user);
         model.addAttribute("user", userBean);
 
-        return new ModelAndView("redirect:/user/add");
+        return "redirect:/user/register";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -103,18 +103,6 @@ public class UserController {
 
         model.put("user", prepareUserBean(userService.findById(userBean.getUser_id())));
         model.put("users", prepareListofBean(userService.findAll()));
-
-        return new ModelAndView("product_add", model);
-    }
-
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView delete(@ModelAttribute UserBean userBean)
-    {
-        Map<String, Object> model = new HashMap<String, Object>();
-
-        userService.deleteById(userBean.getUser_id());
-        model.put("product", null);
-        model.put("products",prepareListofBean(userService.findAll()));
 
         return new ModelAndView("product_add", model);
     }

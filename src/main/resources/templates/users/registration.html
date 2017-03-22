@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block th:include="partials/import :: import"></th:block>
+    <title>Register</title>
 </head>
+<th:block th:include="partials/header :: header"></th:block>
 <body>
+<div class="col-md-12">
+    <div class="container">
+        <div class="row">
+            <h4>New User</h4>
+            <div class="col-md-6">
+                <form action="#" th:action="@{/user/register}" th:object="${user}" method="POST">
+                    <div class="form-group">
+                        <label th:for="name" th:text="Name"/>
+                        <input th:field="*{name}" name="name" type="text" class="form-control" placeholder="Name"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label th:for="email" th:text="Email"/>
+                        <input th:field="*{email}" name="email" type="text" class="form-control" placeholder="sample@example.com"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label th:for="password" th:text="Password"/>
+                        <input th:field="*{password}"  th:type="password" name="password" class="form-control" placeholder="********"/>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

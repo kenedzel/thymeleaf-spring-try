@@ -35,3 +35,9 @@ footer {
 .font-green {
     color: #4cae4c;
 }
+
+.price-row {
+    margin-left: 67%;
+    font-size: 26px;
+    padding-top: 4%;
+}

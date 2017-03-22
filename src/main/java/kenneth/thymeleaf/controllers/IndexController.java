@@ -48,7 +48,15 @@ public class IndexController {
 
     @RequestMapping("/")
     public String getIndex(Model model) {
+        model.addAttribute("products", prepareListofBean(productService.findAllActive()));
+        model.addAttribute("name", this.name);
+        model.addAttribute("bannerTitle", this.bannerTitle);
+        return "index";
+    }
 
+    @RequestMapping("/home")
+    public String home(Model model)
+    {
         model.addAttribute("products", prepareListofBean(productService.findAll()));
         model.addAttribute("name", this.name);
         model.addAttribute("bannerTitle", this.bannerTitle);
