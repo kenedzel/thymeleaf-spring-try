@@ -30,7 +30,7 @@
                     <td th:text="${product.name}"></td>
                     <td th:text="${product.description}"></td>
                     <td th:text="${product.price}"></td>
-                    <td th:text="${product.active} == true ? 'Yes' : 'No'"></td>
+                    <td th:text="${product.active} == true ? 'active' : 'inactive'"></td>
                     <td><a class="btn btn-sm btn-default" th:href="@{/products/view/{id}/(id=${product.id})}"><span class="fa fa-eye"></span></a>
                         <a class="btn btn-sm btn-default" th:href="@{/products/edit/{id}/(id=${product.id})}"><span class="fa fa-pencil-square-o"></span></a>
                         <!--<a class="btn btn-sm btn-default" th:href="@{/products/delete/{id}/(id=${product.id})}"><span class="fa fa-trash"></span></a>-->

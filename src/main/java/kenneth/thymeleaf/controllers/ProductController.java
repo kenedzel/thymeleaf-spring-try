@@ -52,6 +52,8 @@ public class ProductController {
                 bean.setName(product.getName());
                 bean.setDescription(product.getDescription());
                 bean.setPrice(product.getPrice());
+                bean.setActive(product.isActive());
+                System.out.println(bean);
                 beans.add(bean);
             }
         }
@@ -65,6 +67,7 @@ public class ProductController {
         bean.setName(product.getName());
         bean.setDescription(product.getDescription());
         bean.setPrice(product.getPrice());
+        bean.setActive(product.isActive());
 
         return bean;
     }

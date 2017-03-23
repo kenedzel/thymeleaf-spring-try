@@ -6,7 +6,6 @@ import kenneth.thymeleaf.repositories.RoleRepository;
 import kenneth.thymeleaf.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -25,8 +24,8 @@ public class UserServiceJpaImpl implements UserService{
     @Autowired
     RoleRepository roleRepository;
 //
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public User findUserByEmail(String email) {
@@ -46,7 +45,7 @@ public class UserServiceJpaImpl implements UserService{
     @Override
     public User create(User user) {
 
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
