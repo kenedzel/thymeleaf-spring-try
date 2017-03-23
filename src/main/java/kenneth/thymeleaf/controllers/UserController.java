@@ -4,6 +4,7 @@ import kenneth.thymeleaf.bean.ProductBean;
 import kenneth.thymeleaf.bean.UserBean;
 import kenneth.thymeleaf.models.Product;
 import kenneth.thymeleaf.models.User;
+import kenneth.thymeleaf.services.RoleService;
 import kenneth.thymeleaf.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,18 +31,18 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    private User prepareModel(UserBean userBean)
+    public User prepareModel(UserBean userBean)
     {
         User user = new User();
         user.setUser_id(userBean.getUser_id());
         user.setName(userBean.getName());
         user.setEmail(userBean.getEmail());
         user.setPassword(userBean.getPassword());
-
+        user.setRoles(userBean.getRoles());
         return user;
     }
 
-    private List<UserBean> prepareListofBean(List<User> users)
+    public List<UserBean> prepareListofBean(List<User> users)
     {
         List<UserBean> beans = null;
         if(users != null && !users.isEmpty())
@@ -55,20 +56,21 @@ public class UserController {
                 bean.setName(user.getName());
                 bean.setEmail(user.getEmail());
                 bean.setPassword(user.getPassword());
+                bean.setRoles(user.getRoles());
                 beans.add(bean);
             }
         }
         return beans;
     }
 
-    private UserBean prepareUserBean(User user)
+    public UserBean prepareUserBean(User user)
     {
         UserBean bean = new UserBean();
         bean.setUser_id(user.getUser_id());
         bean.setName(user.getName());
         bean.setEmail(user.getEmail());
         bean.setPassword(user.getPassword());
-
+        bean.setRoles(user.getRoles());
         return bean;
     }
 
@@ -90,7 +92,7 @@ public class UserController {
     {
         User user = prepareModel(userBean);
         System.out.println(user);
-//        userService.create(user);
+        userService.create(user);
         model.addAttribute("user", userBean);
 
         return "redirect:/user/register";
@@ -107,14 +109,14 @@ public class UserController {
         return new ModelAndView("product_add", model);
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView listAll()
     {
         Map<String, Object> model = new HashMap<String, Object>();
 
         model.put("users", prepareListofBean(userService.findAll()));
 
-        return new ModelAndView("users", model);
+        return new ModelAndView("/users/index", model);
     }
 
 }

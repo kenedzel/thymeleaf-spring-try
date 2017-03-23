@@ -1,5 +1,9 @@
 package kenneth.thymeleaf.bean;
 
+import kenneth.thymeleaf.models.Role;
+
+import java.util.Set;
+
 /**
  * Created by kenneth on 3/15/17.
  */
@@ -13,14 +17,17 @@ public class UserBean {
 
     private String password;
 
+    private Set<Role> roles;
+
     public UserBean() {
     }
 
-    public UserBean(Long user_id, String name, String email, String password) {
+    public UserBean(Long user_id, String name, String email, String password, Set<Role> roles) {
         this.user_id = user_id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public Long getUser_id() {
@@ -55,6 +62,14 @@ public class UserBean {
         this.password = password;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "UserBean{" +
@@ -62,6 +77,7 @@ public class UserBean {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

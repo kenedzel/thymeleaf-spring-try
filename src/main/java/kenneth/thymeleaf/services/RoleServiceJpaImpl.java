@@ -19,8 +19,8 @@ public class RoleServiceJpaImpl implements RoleService{
     RoleRepository roleRepository;
 
     @Override
-    public Role findByRole(String role) {
-        return null;
+    public List<Role> findByRole(String role) {
+        return this.roleRepository.findByRole(role);
     }
 
     @Override

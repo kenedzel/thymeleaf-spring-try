@@ -1,0 +1,42 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <th:block th:include="partials/import :: import"></th:block>
+
+    <title>Title</title>
+</head>
+<th:block th:include="partials/header :: header"></th:block>
+
+
+<body>
+<th:block th:include="users/deleteModal :: delete"></th:block>
+<div class="container">
+    <div class="row">
+        <table class="data-table table table-hover table-responsive" id="data-table" width="70%">
+            <thead>
+            <tr>
+                <th>name</th>
+                <th>email</th>
+                <!--<th></th>-->
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="user,iterationStatus  : ${users}">
+
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+                <!--<td><a class="btn btn-sm btn-default" th:href="@{/products/view/{id}/(id=${product.id})}"><span class="fa fa-eye"></span></a>-->
+                    <!--<a class="btn btn-sm btn-default" th:href="@{/products/edit/{id}/(id=${product.id})}"><span class="fa fa-pencil-square-o"></span></a>-->
+                    <!--&lt;!&ndash;<a class="btn btn-sm btn-default" th:href="@{/products/delete/{id}/(id=${product.id})}"><span class="fa fa-trash"></span></a>&ndash;&gt;-->
+                    <!--<a id="delete" class="btn btn-sm btn-default" data-toggle="modal"  th:onclick="'passOnClick(\'' + ${product.id} + '\')'" th:attr="data-target='#delete'"><span class="fa fa-trash"></span></a>-->
+                <!--</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface RoleService {
 
-    Role findByRole(String role);
+    List <Role> findByRole(String role);
     List<Role> findAll();
     Role findById(Long id);
     Role create(Role role);

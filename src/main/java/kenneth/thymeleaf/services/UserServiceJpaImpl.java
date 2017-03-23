@@ -19,6 +19,7 @@ import java.util.List;
 @Primary
 public class UserServiceJpaImpl implements UserService{
 
+    @Autowired
     UserRepository userRepository;
 
     @Autowired
@@ -44,11 +45,9 @@ public class UserServiceJpaImpl implements UserService{
 
     @Override
     public User create(User user) {
-
 //        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
-        Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        user.setRoles(new HashSet<>(roleRepository.findByRole("NORMAL")));
         return this.userRepository.save(user);
     }
 

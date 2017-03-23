@@ -138,7 +138,7 @@ public class ProductController {
     {
         Map<String, Object> model = new HashMap<>();
         model.put("products", prepareListofBean(productService.findAll()));
-        return new ModelAndView("products/products", model);
+        return new ModelAndView("products/index", model);
     }
 
 
