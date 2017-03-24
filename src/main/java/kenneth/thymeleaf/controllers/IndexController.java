@@ -35,12 +35,20 @@ public class IndexController {
     @Autowired
     UserService userService;
 
-    UserController userController;
-
     public String name="Default Name";
 
     public String bannerTitle = "Thymeleaf";
 
+    public User prepareModel(UserBean userBean)
+    {
+        User user = new User();
+        user.setUser_id(userBean.getUser_id());
+        user.setName(userBean.getName());
+        user.setEmail(userBean.getEmail());
+        user.setPassword(userBean.getPassword());
+        user.setRoles(userBean.getRoles());
+        return user;
+    }
 
     private List<ProductBean> prepareListofBean(@RequestBody List<Product> products)
     {
@@ -105,18 +113,19 @@ public class IndexController {
 //
 //        model.addAttribute("authRole", auth.getAuthorities());
         model.addAttribute("user", new User());
-        return "/users/registration";
+        return "/registration";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerSave(@ModelAttribute UserBean userBean , Model model)
     {
-        User user = userController.prepareModel(userBean);
-
-        userService.create(user);
+        User user = prepareModel(userBean);
         System.out.println("created user: " + user);
+        userService.create(user);
+        model.addAttribute("user", userBean); //display created user's email upon autologin
+        model.addAttribute("notice", "User has been created.");
         //temporary
-        return "/users/registration";
+        return "redirect:/login";
     }
 
     @RequestMapping("/home")

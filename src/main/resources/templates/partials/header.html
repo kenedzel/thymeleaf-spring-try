@@ -24,7 +24,7 @@
                     </li>
                     <!--if admin - register user as admin/normal-->
                     <!-- if register page, register user as normal-->
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <li th:if="${#strings.contains(#authentication.getAuthorities(), 'ADMIN')}" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         Users <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a th:href="@{/user/register}">Add User</a></li>
@@ -33,14 +33,14 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <span class="glyphicon glyphicon-user" th:text=" ${authName}"></span> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a th:href="@{/logout}">Log Out</a></li>
-                            <li th:if="${#strings.contains(#authentication.getAuthorities(), 'ADMIN')}"><a th:href="@{/}" th:text="${#authentication.getAuthorities()}"></a></li>
+                            <!--<li th:if="${#strings.contains(#authentication.getAuthorities(), 'ADMIN')}"><a th:href="@{/}" th:text="${#authentication.getAuthorities()}"></a></li>-->
                         </ul>
                     </li>
-                    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                 </ul>
             </div>
         </div>

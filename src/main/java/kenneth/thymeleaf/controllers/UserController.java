@@ -3,6 +3,7 @@ package kenneth.thymeleaf.controllers;
 import kenneth.thymeleaf.bean.ProductBean;
 import kenneth.thymeleaf.bean.UserBean;
 import kenneth.thymeleaf.models.Product;
+import kenneth.thymeleaf.models.Role;
 import kenneth.thymeleaf.models.User;
 import kenneth.thymeleaf.services.RoleService;
 import kenneth.thymeleaf.services.UserService;
@@ -15,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Created by kenneth on 3/15/17.
@@ -30,6 +28,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RoleService roleService;
 
     public User prepareModel(UserBean userBean)
     {
@@ -74,6 +75,12 @@ public class UserController {
         return bean;
     }
 
+
+    public ArrayList<Role> getRoles()
+    {
+        return new ArrayList<>(roleService.findAll());
+    }
+
     @RequestMapping(value = "/view")
     public String getUser()
     {
@@ -83,6 +90,8 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String add(Model model)
     {
+        System.out.println(getRoles());
+        model.addAttribute("roles", getRoles());
         model.addAttribute("user", new User());
         return "/users/registration";
     }

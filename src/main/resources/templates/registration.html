@@ -16,7 +16,7 @@
         <div class="row">
             <h4>New User</h4>
             <div class="col-md-6">
-                <form action="#" th:action="@{/user/register}" th:object="${user}" method="POST">
+                <form action="#" th:action="@{/register}" th:object="${user}" method="POST">
                     <div class="form-group">
                         <label th:for="name" th:text="Name"/>
                         <input th:field="*{name}" name="name" type="text" class="form-control" placeholder="Name"/>
@@ -30,13 +30,6 @@
                     <div class="form-group">
                         <label th:for="password" th:text="Password"/>
                         <input th:field="*{password}"  th:type="password" name="password" class="form-control" placeholder="********"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label th:for="role" th:text="Role"/>
-                        <select th:field="*{roles}" name="roles" class="selectpicker" id="selectpicker">
-                            <option th:each="role : ${roles}" th:value="${role.role_id}" th:text="${role.role}"></option>
-                        </select>
                     </div>
 
                     <div class="form-group">
