@@ -101,6 +101,8 @@ public class UserController {
     {
         User user = prepareModel(userBean);
         System.out.println(user);
+        System.out.println("ISADMIN?: " + user.getRoles());
+        System.out.println("role from user controller: " + user.getRoles());
         userService.create(user);
         model.addAttribute("user", userBean);
 

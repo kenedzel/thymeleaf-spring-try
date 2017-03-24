@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -48,8 +49,12 @@ public class UserServiceJpaImpl implements UserService{
     public User create(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
+
+//        user.setRoles(new HashSet<>(roleRepository.findByRole("NORMAL")));
+        // check return type of role repository on tu
         user.setRoles(new HashSet<>(roleRepository.findByRole("NORMAL")));
-        return this.userRepository.save(user);
+        return null;
+//        return this.userRepository.save(user);
     }
 
     @Override

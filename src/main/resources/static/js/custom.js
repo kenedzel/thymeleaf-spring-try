@@ -6,6 +6,10 @@ $.extend( true, $.fn.dataTable.defaults, {
 } );
 $(document).ready(function () {
     $('#data-table').DataTable();
+    $('.selectpicker').selectpicker({
+        size: 8,
+        tickIcon: ""
+    });
 });
 function passOnClick(id)
 {
